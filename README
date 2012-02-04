@@ -1,0 +1,7 @@
+
+You don't want to USE it, this is still PRE-ALPHA
+You need Qt 4.6+ and cmake 2.8+ to build it
+Set -std=c++0x in cmake CXX flags
+
+Regards,
+	Ast-Or-Maar
