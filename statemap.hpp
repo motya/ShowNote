@@ -11,22 +11,13 @@ class StateMap : public QObject
 {
     Q_OBJECT
 
-    friend class Widget;
-
-
+//    friend class Widget;
 public:
-
 
     StateMap() = default;
     virtual ~StateMap();
     int interval() const;
     Mode::Mode mode() const;
-    //QSharedPointer<TextMap::TextMap> textMap() const;
-
-    // constants
-    //    static const int intervalMinimum = 1;
-    //    static const int intervalMaximum = 30;
-    // end constants
 
 protected slots:
     void setInterval( int newValue);
@@ -42,7 +33,6 @@ signals:
 private:
     int interval_;
     Mode::Mode mode_;
-    //QSharedPointer<TextMap::TextMap> textMap_;
     bool isStarted_;
 };
 

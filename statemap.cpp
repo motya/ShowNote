@@ -29,20 +29,9 @@ void StateMap::setMode ( Mode::Mode newMode)
     emit modeChanged(mode_);
 }
 
-//QSharedPointer<TextMap::TextMap> StateMap::textMap() const
-//{
-//    return textMap_;
-//}
-
 void StateMap::onStartClicked()
 {
     isStarted_ = !isStarted_;
-    if (isStarted_)
-    {
-        emit start();
-    }
-    else
-    {
-        emit stop();
-    }
+    emit (this->*(isStarted_ ? &StateMap::start : &StateMap::stop))();
 }
+

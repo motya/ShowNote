@@ -6,16 +6,18 @@ Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui_(new Ui::Widget),
     signalMapper_(new QSignalMapper(this)),
-    widgetToMode_( {
-        { ui_->modeRadioPlain, Mode::ModePlain },
-        { ui_->modeRadioTriple, Mode::ModeTriple },
-        { ui_->modeRadioTripleReverse, Mode::ModeTripleReverse }
-                   }
-        ),
+    widgetToMode_(
+                    {
+                        { ui_->modeRadioPlain, Mode::ModePlain },
+                        { ui_->modeRadioTriple, Mode::ModeTriple },
+                        { ui_->modeRadioTripleReverse, Mode::ModeTripleReverse }
+                    }
+                 ),
     noteColors_( {Qt::red, Qt::green, Qt::blue} )
 {
     ui_->setupUi(this);
     connectInternal();
+    modeSelected(Mode::ModePlain);
 }
 
 Widget::~Widget()
@@ -28,7 +30,6 @@ void Widget::connectToStateMap( QSharedPointer<QObject> stateMap) const
     stateMap->connect(ui_->dial, SIGNAL(valueChanged(int)), SLOT(setInterval(int)));
     stateMap->connect(ui_->spinBox, SIGNAL(valueChanged(int)), SLOT(setInterval(int)));
     stateMap->connect(this, SIGNAL(modeSelected(Mode::Mode)), SLOT(setMode(Mode::Mode)));
-
 }
 
 void Widget::connectInternal() const
@@ -60,10 +61,14 @@ void Widget::connectToTextProvider(QObject *emitent)
 }
 void Widget::onNoteChange(const QString& )
 {
-    auto colorIterator = noteColors_.begin();
     static int i = 0;
-    advance(colorIterator, ++i % noteColors_.size() );
     QPalette palette( ui_->lineEdit->palette());
-    palette.setBrush( QPalette::Text, QBrush(*colorIterator) );
+
+    {
+        auto colorIterator = noteColors_.begin();
+        std::advance(colorIterator, ++i % noteColors_.size() );
+        palette.setBrush( QPalette::Text, QBrush(*colorIterator) );
+    }
+
     ui_->lineEdit->setPalette(palette);
 }

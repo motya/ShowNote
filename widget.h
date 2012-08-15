@@ -5,7 +5,7 @@
 #include <QPushButton>
 #include <QDial>
 #include <QSignalMapper>
-#include <map>
+#include <QMap>
 #include "mode.hpp"
 //class StateMap;
 
@@ -37,8 +37,8 @@ public slots:
 private:
     QSharedPointer<Ui::Widget> ui_;
     QSignalMapper *signalMapper_;
-    std::map<QWidget*, Mode::Mode> widgetToMode_;
-    std::list<QColor> noteColors_;
+    QMap<QWidget*, Mode::Mode> widgetToMode_;
+    QVector<QColor> noteColors_;
 };
 
 #endif // WIDGET_H

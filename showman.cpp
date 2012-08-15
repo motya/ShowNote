@@ -12,7 +12,7 @@ ShowMan::ShowMan(QSharedPointer<StateMap> stateMap, QObject *parent) :
 
 void ShowMan::onStart() const
 {
-    timer_->start( stateMap_->interval() * 10 );
+    timer_->start( stateMap_->interval() * intervalMultiplier );
 }
 
 void ShowMan::onTimerTriggered() const
@@ -28,7 +28,7 @@ void ShowMan::onTimerTriggered() const
         Q_ASSERT(iterator != TextMap::map.end());
         emit show( *iterator );
     } break;
-    default:
+    default: //TODO: throw an exception
         emit show ("ERROR");
     };
 }

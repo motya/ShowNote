@@ -12,6 +12,7 @@ class ShowMan : public QObject
 public:
     ShowMan() = delete;
     explicit ShowMan(QSharedPointer<StateMap> stateMap, QObject *parent = 0);
+    static const int intervalMultiplier = 10;
 
 signals:
 
