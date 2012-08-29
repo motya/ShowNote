@@ -1,20 +1,19 @@
 #include <QBrush>
-#include "widget.h"
+#include <vector>
+#include <boost/assign/list_of.hpp> // for 'list_of()'
+#include <boost/assign/std/vector.hpp> // for 'operator+=()'
+#include "widget.hpp"
 #include "ui_widget.h"
+using namespace boost::assign;
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui_(new Ui::Widget),
-    signalMapper_(new QSignalMapper(this)),
-    widgetToMode_(
-                    {
-                        { ui_->modeRadioPlain, Mode::ModePlain },
-                        { ui_->modeRadioTriple, Mode::ModeTriple },
-                        { ui_->modeRadioTripleReverse, Mode::ModeTripleReverse }
-                    }
-                 ),
-    noteColors_( {Qt::red, Qt::green, Qt::blue} )
+    signalMapper_(new QSignalMapper(this))
+   
 {
+   
+    noteColors_ = list_of(Qt::red)(Qt::green)(Qt::blue); // TIP: include <vector> if it fails to use list_of
     ui_->setupUi(this);
     connectInternal();
     modeSelected(Mode::ModePlain);
@@ -65,7 +64,7 @@ void Widget::onNoteChange(const QString& )
     QPalette palette( ui_->lineEdit->palette());
 
     {
-        auto colorIterator = noteColors_.begin();
+        std::vector<QColor>::iterator colorIterator = noteColors_.begin();     
         std::advance(colorIterator, ++i % noteColors_.size() );
         palette.setBrush( QPalette::Text, QBrush(*colorIterator) );
     }

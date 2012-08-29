@@ -14,7 +14,8 @@ class StateMap : public QObject
 //    friend class Widget;
 public:
 
-    StateMap() = default;
+  //  StateMap() = default;
+    StateMap();
     virtual ~StateMap();
     int interval() const;
     Mode::Mode mode() const;

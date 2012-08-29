@@ -10,7 +10,8 @@ class ShowMan : public QObject
 {
     Q_OBJECT
 public:
-    ShowMan() = delete;
+    //ShowMan() = delete;
+    ShowMan();
     explicit ShowMan(QSharedPointer<StateMap> stateMap, QObject *parent = 0);
     static const int intervalMultiplier = 10;
 

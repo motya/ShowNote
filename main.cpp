@@ -1,9 +1,8 @@
 #include <QApplication>
 #include <QScopedPointer>
-#include "widget.hpp"
 #include "showman.hpp"
 #include "statemap.hpp"
-
+#include "widget.hpp"
 
 int main(int argc, char *argv[])
 {

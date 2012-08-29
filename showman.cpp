@@ -4,8 +4,8 @@
 
 ShowMan::ShowMan(QSharedPointer<StateMap> stateMap, QObject *parent) :
     QObject(parent),
-    timer_( new QTimer ),
-    stateMap_( stateMap )
+    stateMap_( stateMap ),
+    timer_( new QTimer )
 {
     connect( timer_.data(), SIGNAL(timeout()), SLOT(onTimerTriggered()) );
 }
@@ -21,12 +21,13 @@ void ShowMan::onTimerTriggered() const
     {
     case Mode::ModePlain:
     {
-        auto iterator = TextMap::map.begin();
+        vector<QString>::const_iterator iter = TextMap::map.begin();
+        
         const int randomStep = qrand() % ( TextMap::size );
-        advance( iterator, randomStep);
+        advance( iter, randomStep);
 
-        Q_ASSERT(iterator != TextMap::map.end());
-        emit show( *iterator );
+        Q_ASSERT(iter != TextMap::map.end());
+        emit show( *iter );
     } break;
     default: //TODO: throw an exception
         emit show ("ERROR");
