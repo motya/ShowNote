@@ -1,6 +1,6 @@
 #include <QApplication>
 #include <QScopedPointer>
-#include "widget.h"
+#include "widget.hpp"
 #include "showman.hpp"
 #include "statemap.hpp"
 
